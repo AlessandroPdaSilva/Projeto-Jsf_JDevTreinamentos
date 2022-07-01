@@ -11,10 +11,15 @@
  	
  	<h:form>
  		<h:inputText value="#{pessoaBean.nome}"/> <br/>
- 		<h:inputText value="#{pessoaBean.sobrenome}"/><br/>
- 		<h:outputText value="#{pessoaBean.nomeCompleto}"/><br/>
+ 		 
+ 		<h:commandButton value="Enviar" action="#{pessoaBean.addNome}"/>
  		
- 		<h:commandButton value="Enviar" action="#{pessoaBean.mostraNome}"/>
+ 		<h:dataTable value="#{pessoaBean.nomes}" var="n">
+ 			<h:column>
+ 				<h:outputText value="#{n}"/>
+ 			</h:column>
+ 		</h:dataTable>
+ 		
  	</h:form>
  	
  </h:body>
