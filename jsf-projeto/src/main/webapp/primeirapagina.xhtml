@@ -12,7 +12,7 @@
  	<h:form>
  		<h:inputText value="#{pessoaBean.nome}"/> <br/>
  		 
- 		<h:commandButton value="Enviar" action="#{pessoaBean.addNome}"/>
+ 		<h:commandButton binding="#{pessoaBean.botao}" value="Enviar" action="#{pessoaBean.addNome}"/>
  		
  		<h:dataTable value="#{pessoaBean.nomes}" var="n">
  			<h:column>
