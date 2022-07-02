@@ -26,8 +26,9 @@ public class PessoaBean {
 	public String addNome() {
 		nomes.add(nome);
 		
-		if(nomes.size() >= 3) {
+		if(nomes.size() > 3) {
 			botao.setDisabled(true);
+			return "paginanavegada";
 		}
 		
 		return "";
