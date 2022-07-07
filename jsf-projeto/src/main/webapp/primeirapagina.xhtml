@@ -10,15 +10,18 @@
  <h:body>
  	
  	<h:form>
- 		<h:inputText value="#{pessoaBean.nome}"/> <br/>
- 		 
- 		<h:commandButton binding="#{pessoaBean.botao}" value="Enviar" action="#{pessoaBean.addNome}"/>
- 		
- 		<h:dataTable value="#{pessoaBean.nomes}" var="n">
- 			<h:column>
- 				<h:outputText value="#{n}"/>
- 			</h:column>
- 		</h:dataTable>
+ 		<h:outputLabel value="Nome:"/>
+ 	 	<h:inputText value="#{pessoaBean.pessoa.nome}"/><br/>
+ 	 	
+ 	 	<h:outputLabel value="Sobrenome:"/>
+ 	 	<h:inputText value="#{pessoaBean.pessoa.sobrenome}"/><br/>
+ 	 	
+ 	 	<h:outputLabel value="Idade:"/>
+ 	 	<h:inputText value="#{pessoaBean.pessoa.idade}"/><br/>
+ 	 	 
+ 	  	
+ 	 	
+ 		<h:commandButton value="Enviar" action="#{pessoaBean.salvar}"/>
  		
  	</h:form>
  	
