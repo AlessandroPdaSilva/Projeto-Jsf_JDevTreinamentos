@@ -31,8 +31,8 @@
 			<h:outputLabel value="Idade:" />
 			<h:inputText value="#{pessoaBean.pessoa.idade}" />
 			
-			<h:outputLabel value="Sexo:" />
-			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
+			<h:outputLabel value="Sexo:"/>
+			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
 				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]" noSelectionOption="true"/>
 				<f:selectItem itemValue="M" itemLabel="Masculino"/>
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
@@ -43,10 +43,10 @@
 			
 			<h:outputText/>
 			<h:panelGroup>
-				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" />
-				<h:commandButton value="Novo" action="#{pessoaBean.novo}" />
-				<h:commandButton value="Excluir" action="#{pessoaBean.deletar}" />
-				<h:commandButton value="Limpar" type="reset"/>
+				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvar.png"/>
+				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/novo_usuario.png"/>
+				<h:commandButton value="Excluir" action="#{pessoaBean.deletar}" image="resources/img/lixeira.png"/>
+				<h:commandButton value="Limpar" type="reset" image="resources/img/limpar.png"/>
 			</h:panelGroup>
 			 
 		</h:panelGrid>
@@ -76,16 +76,24 @@
 				<f:facet name="header">idade</f:facet>
 				<h:outputText value="#{p.idade}" />
 			</h:column>
+			
 			<h:column>
-				<h:commandLink value="Editar">
+				<h:commandLink value="" title="Editar">
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
+						
+					<h:graphicImage value="resources/img/editar.png"/>
+					
 				</h:commandLink>
 			</h:column>
+			
 			<h:column>
-				<h:commandLink value="Excluir" action="#{pessoaBean.deletar}">
+				<h:commandLink value="" title="Excluir" action="#{pessoaBean.deletar}">
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
+						
+					<h:graphicImage value="resources/img/lixeira.png"/>
+					
 				</h:commandLink>
 			</h:column>
 
