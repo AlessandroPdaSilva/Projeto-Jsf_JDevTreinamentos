@@ -25,15 +25,16 @@ public class DaoGenerico<E> {
 	}
 	
 	// EDITAR
-	public void editar(E entidade){
+	public E editar(E entidade){
 		
 		EntityTransaction transacao = entityManager.getTransaction();
 		
 		transacao.begin();
-		entityManager.merge(entidade);
+		E e = entityManager.merge(entidade);
 				
 		transacao.commit();
 		
+		return e;
 	}
 	
 	// DELETAR
