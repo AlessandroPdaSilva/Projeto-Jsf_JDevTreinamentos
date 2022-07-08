@@ -22,4 +22,10 @@ public class Teste {
 		daoPessoa.salvar(pessoa);
 	}
 	
+	@Test
+	public void teste(){
+		Persistence.createEntityManagerFactory("jsf-projeto");
+		
+	}
+	
 }
