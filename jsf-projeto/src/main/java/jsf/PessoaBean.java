@@ -76,7 +76,18 @@ public class PessoaBean {
 		
 	}
 	
-	
+	// PERMITE ACESSO
+	public Boolean permiteAcesso(String perfilAcesso){
+		
+		// adicionar na sessao
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext external = context.getExternalContext();
+		
+	 	Pessoa p =(Pessoa) external.getSessionMap().get("usuarioLogado");
+		
+		return p.getPerfil().equals(perfilAcesso);
+		
+	}
 	
 	
 	
