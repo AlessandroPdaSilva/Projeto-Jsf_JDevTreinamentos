@@ -33,13 +33,30 @@
 			
 			<h:outputLabel value="Sexo:"/>
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
-				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]" noSelectionOption="true"/>
+				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
 				<f:selectItem itemValue="M" itemLabel="Masculino"/>
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel value="Usuario Ativo:" />
 		 	<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+		 	
+		 	<h:outputLabel value="Login:" />
+			<h:inputText value="#{pessoaBean.pessoa.login}" />
+			
+			<h:outputLabel value="Senha:" />
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
+		 	
+		 	<h:outputLabel value="Perfil:"/>
+			<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfil}" required="true">
+				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
+				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>
+				<f:selectItem itemValue="USUARIO" itemLabel="Usuario"/>
+				<f:selectItem itemValue="SECRETARIO" itemLabel="Secretario"/>
+			</h:selectOneMenu>
+		 	
+		 	
+		 	
 			
 			<h:outputText/>
 			<h:panelGroup>

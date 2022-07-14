@@ -10,9 +10,13 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlCommandButton;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import dao.DaoGenerico;
 import model.Pessoa;
+import repository.IDaoPessoa;
+import repository.IDaoPessoaImpl;
 
 @ManagedBean(name = "pessoaBean")
 @ViewScoped
@@ -21,18 +25,23 @@ public class PessoaBean {
 	Pessoa pessoa = new Pessoa();
 	DaoGenerico<Pessoa> daoPessoa = new DaoGenerico<Pessoa>();
 	List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+	IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
 	
+	
+	// SALVAR
 	public String salvar(){
 		pessoa = daoPessoa.editar(pessoa);
 		lista();
 		return "";
 	}
 
+	// NOVO
 	public String novo(){
 		pessoa = new Pessoa();
 		return "";
 	}
 	
+	//DELETAR
 	public String deletar(){
 		daoPessoa.deletar(pessoa);
 		novo();
@@ -40,10 +49,34 @@ public class PessoaBean {
 		return "";
 	}
 	
+	//LISTAR
 	@PostConstruct
 	public void lista(){
 		listaPessoa = daoPessoa.listar(Pessoa.class);
 	}
+	
+	//LOGAR
+	public String logar(){
+		
+		 
+		Pessoa p = idaoPessoa.consultaPessoa(pessoa.getLogin(), pessoa.getSenha());
+		
+		if(p != null) {
+			
+			// adicionar na sessao
+			FacesContext context = FacesContext.getCurrentInstance();
+			ExternalContext external = context.getExternalContext();
+			
+			external.getSessionMap().put("usuarioLogado", p);
+			
+			return "primeirapagina.jsf";
+		}else {
+			return "index.jsf";
+		}
+		
+	}
+	
+	
 	
 	
 	
