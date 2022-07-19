@@ -15,10 +15,7 @@ public class IDaoPessoaImpl implements IDaoPessoa{
 	public Pessoa consultaPessoa(String login, String senha) {
 		
 		Pessoa p = new Pessoa();
-		EntityTransaction transacao = entityManager.getTransaction();
 		 
-		 
-		
 		p = (Pessoa) entityManager.createQuery("SELECT p FROM Pessoa p WHERE login = '" + login + "' "
 				+ "AND senha = '"+senha+"'").getSingleResult();
 		
