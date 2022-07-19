@@ -4,6 +4,7 @@
 	<persistence-unit name="jsf-projeto">
 		
 		<class>model.Pessoa</class>
+		<class>model.Lancamento</class>
 		
 		<!-- DADOS BANCO -->
 		<properties>

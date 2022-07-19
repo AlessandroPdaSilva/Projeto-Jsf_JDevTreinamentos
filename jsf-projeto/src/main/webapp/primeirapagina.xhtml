@@ -10,9 +10,14 @@
 
 <h:body>
 
-
-
+	
 	<h:form>
+		<h:commandLink value="Home" action="primeirapagina" style="margin-left:1%;"/>  
+		<h:commandLink value="Login" action="index" style="margin-left:1%;"/>
+		<h:commandLink value="Lançamentos" action="lancamentos" style="margin-left:1%;"/>
+	</h:form>
+
+	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -104,7 +109,7 @@
 				</h:commandLink>
 			</h:column>
 			
-			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+			<h:column >
 				<h:commandLink value="" title="Excluir" action="#{pessoaBean.deletar}" >
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
