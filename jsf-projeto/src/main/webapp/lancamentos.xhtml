@@ -43,6 +43,56 @@
 			
 			
  		</h:panelGrid>	 
+ 		
+ 		
+ 		
+ 		<h:dataTable value="#{lancamentoBean.listaLancamento}" var="l" border="3" cellpadding="6">
+		
+			<f:facet name="header">
+				Lista de Lançamentos
+			</f:facet>
+			<h:column>
+				<f:facet name="header">ID:</f:facet>
+				<h:outputText value="#{l.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Origem:</f:facet>
+				<h:outputText value="#{l.empresaOrigem}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Destino:</f:facet>
+				<h:outputText value="#{l.empresaDestino}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome Usuario</f:facet>
+				<h:outputText value="#{l.usuario.nome}" />
+			</h:column>
+			
+			<h:column>
+				<h:commandLink value="" title="Editar">
+					<f:setPropertyActionListener value="#{l}"
+						target="#{lancamentoBean.lancamento}" />
+						
+					<h:graphicImage value="resources/img/editar.png"/>
+					
+				</h:commandLink>
+			</h:column>
+			
+			<h:column >
+				<h:commandLink value="" title="Excluir" action="#{lancamentoBean.deletar}" >
+					<f:setPropertyActionListener value="#{l}"
+						target="#{lancamentoBean.lancamento}" />
+						
+					<h:graphicImage value="resources/img/lixeira.png"/>
+					
+				</h:commandLink>
+			</h:column>
+
+
+		</h:dataTable>
+ 		
+ 		
+ 		
  	</h:form>
  	
  	

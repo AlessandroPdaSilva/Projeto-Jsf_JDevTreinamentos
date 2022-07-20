@@ -36,7 +36,7 @@ public class LancamentoBean {
 		
 	 	lancamento.setUsuario(p);
 	 	
-	 	daoLancamento.salvar(lancamento);
+	 	daoLancamento.editar(lancamento);
 		
 	 	listaLancamento();
 		return "";
