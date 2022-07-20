@@ -18,7 +18,9 @@
 	</h:form>
 
 	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
-
+		
+		<h:messages/>
+		
 		<h:panelGrid columns="2">
 			<f:facet name="header">
 				<h:outputText value="Cadastro em JSF"/>  

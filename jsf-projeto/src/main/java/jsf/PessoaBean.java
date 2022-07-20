@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -32,6 +33,7 @@ public class PessoaBean {
 	public String salvar(){
 		pessoa = daoPessoa.editar(pessoa);
 		lista();
+		mostrarMsg("Cadastrado com sucesso!!");
 		return "";
 	}
 
@@ -46,6 +48,7 @@ public class PessoaBean {
 		daoPessoa.deletar(pessoa);
 		novo();
 		lista();
+		mostrarMsg("Deletado com sucesso!!");
 		return "";
 	}
 	
@@ -54,6 +57,14 @@ public class PessoaBean {
 	public void lista(){
 		listaPessoa = daoPessoa.listar(Pessoa.class);
 	}
+	
+	// MOSTRAR MENSAGEM
+	private void mostrarMsg(String msg) {
+		 FacesContext contexto = FacesContext.getCurrentInstance();
+		 FacesMessage mensagem = new FacesMessage(msg);
+		 contexto.addMessage(null,mensagem);
+	}
+	
 	
 	//LOGAR
 	public String logar(){
