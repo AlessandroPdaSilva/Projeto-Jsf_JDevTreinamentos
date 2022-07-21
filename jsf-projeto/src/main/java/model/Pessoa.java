@@ -24,7 +24,7 @@ public class Pessoa implements Serializable{
 	private String sobrenome;
 	private int idade;
 	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	private Date dataNascimento = new Date();
 	private String sexo;
 	private Boolean ativo;
 	

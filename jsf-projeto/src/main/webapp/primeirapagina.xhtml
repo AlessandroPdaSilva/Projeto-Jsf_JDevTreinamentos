@@ -10,7 +10,7 @@
 </h:head>
 
 <h:body>
-	
+	 
 	<ui:include src="/menu.xhtml"/>
 	 
 	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
@@ -26,7 +26,7 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true" />
 
 			<h:outputLabel value="Nome:" />
-			<h:inputText value="#{pessoaBean.pessoa.nome}" />
+			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Preencha o campo nome"/>
 
 			<h:outputLabel value="Sobrenome:" />
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}" />
@@ -34,8 +34,14 @@
 			<h:outputLabel value="Idade:" />
 			<h:inputText value="#{pessoaBean.pessoa.idade}" />
 			
+			<h:outputLabel value="Nascimento:"/>
+			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data errada!!">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
+			</h:inputText>
+			
+			
 			<h:outputLabel value="Sexo:"/>
-			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
+			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" >
 				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
 				<f:selectItem itemValue="M" itemLabel="Masculino"/>
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
@@ -45,13 +51,15 @@
 		 	<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 		 	
 		 	<h:outputLabel value="Login:" />
-			<h:inputText value="#{pessoaBean.pessoa.login}" />
+			<h:inputText value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Preencha o campo Login" validatorMessage="Minimo de 3 caracteres para login"> 
+				<f:validateLength minimum="3"/>
+			</h:inputText>
 			
 			<h:outputLabel value="Senha:" />
 			<h:inputSecret value="#{pessoaBean.pessoa.senha}" />
 		 	
 		 	<h:outputLabel value="Perfil:"/>
-			<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfil}" required="true">
+			<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfil}" >
 				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
 				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>
 				<f:selectItem itemValue="USUARIO" itemLabel="Usuario"/>
