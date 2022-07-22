@@ -13,7 +13,7 @@
 	 
 	<ui:include src="/menu.xhtml"/>
 	 
-	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		
 		<h:messages/>
 		
@@ -74,7 +74,9 @@
 				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvar.png"/>
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" image="resources/img/novo_usuario.png"/>
 				<h:commandButton value="Excluir" action="#{pessoaBean.deletar}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" image="resources/img/lixeira.png" />
-				<h:commandButton value="Limpar" type="reset" image="resources/img/limpar.png"/>
+				<h:commandButton value="Limpar" id="botaoLimpar" action="#{pessoaBean.novo}" image="resources/img/limpar.png">
+					<f:ajax execute="botaoLimpar" render="@form"/>
+				</h:commandButton>
 			</h:panelGroup>
 			 
 		</h:panelGrid>
@@ -83,6 +85,12 @@
 		
 
 
+		
+	</h:form>
+	
+	
+	<h:form id="formTabela">
+	
 		<h:dataTable value="#{pessoaBean.listaPessoa}" var="p" border="3" cellpadding="6">
 		
 			<f:facet name="header">
@@ -127,8 +135,11 @@
 
 
 		</h:dataTable>
-
+		
+	
+		
 	</h:form>
+	
 
 </h:body>
 
