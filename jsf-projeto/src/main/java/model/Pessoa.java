@@ -26,6 +26,9 @@ public class Pessoa implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
 	private String sexo;
+	
+	private String cep;
+	
 	private Boolean ativo;
 	
 	private String login;
@@ -98,12 +101,11 @@ public class Pessoa implements Serializable{
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
-	
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
-				+ ", dataNascimento=" + dataNascimento + "]";
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 	 
-	
 }

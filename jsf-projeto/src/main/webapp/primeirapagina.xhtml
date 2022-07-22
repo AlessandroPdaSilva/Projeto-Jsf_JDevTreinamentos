@@ -47,6 +47,11 @@
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
 			</h:selectOneMenu>
 			
+			<h:outputLabel value="Cep" />
+		 	<h:inputText value="#{pessoaBean.pessoa.cep}"> 
+		 		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisarCep}"/>
+		 	</h:inputText>
+			
 			<h:outputLabel value="Usuario Ativo:" />
 		 	<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 		 	

@@ -1,5 +1,11 @@
 package jsf;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +19,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import dao.DaoGenerico;
 import model.Pessoa;
@@ -58,11 +65,38 @@ public class PessoaBean {
 		listaPessoa = daoPessoa.listar(Pessoa.class);
 	}
 	
+	
+	// PESQUISAR CEP
+	public void pesquisarCep(AjaxBehaviorEvent event){
+		
+		try {
+			URL url = new URL("https://viacep.com.br/ws/"+pessoa.getCep()+"/json/");// URL
+			URLConnection buscaUrl = url.openConnection();// abrindo URL
+			InputStream respUrl = buscaUrl.getInputStream();// resultado URL
+			BufferedReader br = new BufferedReader(new InputStreamReader(respUrl,"UTF-8"));// resultado Json
+			
+			// jogando Json em uma String
+			StringBuilder jsonCep = new StringBuilder();
+			
+			String aux = "";
+			while((aux = br.readLine()) != null) {
+				jsonCep.append(aux);
+			}
+			
+			System.out.println(jsonCep);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mostrarMsg("CEP invalido");
+		}
+	}
+	
+	
 	// MOSTRAR MENSAGEM
 	private void mostrarMsg(String msg) {
-		 FacesContext contexto = FacesContext.getCurrentInstance();
-		 FacesMessage mensagem = new FacesMessage(msg);
-		 contexto.addMessage(null,mensagem);
+		 FacesContext contexto = FacesContext.getCurrentInstance();//pagina
+		 FacesMessage mensagem = new FacesMessage(msg);// mensagem da pagina
+		 contexto.addMessage(null,mensagem);// adicionando
 	}
 	
 	
