@@ -21,6 +21,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import com.google.gson.Gson;
+
 import dao.DaoGenerico;
 import model.Pessoa;
 import repository.IDaoPessoa;
@@ -82,6 +84,14 @@ public class PessoaBean {
 			while((aux = br.readLine()) != null) {
 				jsonCep.append(aux);
 			}
+			
+			// jogando para dentro da classe
+			Pessoa pAux = new Gson().fromJson(jsonCep.toString(), Pessoa.class);
+			
+			pessoa.setLocalidade(pAux.getLocalidade());
+			pessoa.setLogradouro(pAux.getLogradouro());
+			pessoa.setBairro(pAux.getBairro());
+			pessoa.setUf(pAux.getUf());
 			
 			System.out.println(jsonCep);
 			

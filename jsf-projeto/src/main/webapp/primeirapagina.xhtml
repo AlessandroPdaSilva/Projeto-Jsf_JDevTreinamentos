@@ -47,10 +47,26 @@
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
 			</h:selectOneMenu>
 			
-			<h:outputLabel value="Cep" />
+			<h:outputLabel value="Cep:" />
 		 	<h:inputText value="#{pessoaBean.pessoa.cep}"> 
-		 		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisarCep}"/>
+		 		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisarCep}"
+		 		render="logradouro bairro localidade uf"/>
 		 	</h:inputText>
+		 	
+		 	
+		 	<h:outputLabel value="Logradouro:" />
+		 	<h:inputText value="#{pessoaBean.pessoa.logradouro}" id="logradouro"/> 
+		 	
+		 	<h:outputLabel value="Bairro:" />
+		 	<h:inputText value="#{pessoaBean.pessoa.bairro}" id="bairro"/> 
+		 	
+		 	<h:outputLabel value="Localidade:" />
+		 	<h:inputText value="#{pessoaBean.pessoa.localidade}" id="localidade"/> 
+		 	
+		 	<h:outputLabel value="UF:" />
+		 	<h:inputText value="#{pessoaBean.pessoa.uf}" id="uf"/> 
+		 	
+		 	
 			
 			<h:outputLabel value="Usuario Ativo:" />
 		 	<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
