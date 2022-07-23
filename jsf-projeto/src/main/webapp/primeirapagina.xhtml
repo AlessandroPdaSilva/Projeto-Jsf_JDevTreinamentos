@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>Ola mundo</title>
@@ -48,7 +49,7 @@
 			</h:selectOneMenu>
 			
 			<h:outputLabel value="Cep:" />
-		 	<h:inputText value="#{pessoaBean.pessoa.cep}"> 
+		 	<h:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP valido"> 
 		 		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisarCep}"
 		 		render="logradouro bairro localidade uf"/>
 		 	</h:inputText>
