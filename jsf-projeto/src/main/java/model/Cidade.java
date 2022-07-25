@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Cidades implements Serializable{
+public class Cidade implements Serializable{
  
 	private static final long serialVersionUID = 1L;
 	
@@ -22,7 +22,7 @@ public class Cidades implements Serializable{
 	private String nome;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private Estados estados;
+	private Estado estado;
 
 	
 	//GET E SET
@@ -42,12 +42,14 @@ public class Cidades implements Serializable{
 		this.nome = nome;
 	}
 
-	public Estados getEstados() {
-		return estados;
+	 
+
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setEstados(Estados estados) {
-		this.estados = estados;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class Cidades implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cidades other = (Cidades) obj;
+		Cidade other = (Cidade) obj;
 		return Objects.equals(id, other.id);
 	}
 	

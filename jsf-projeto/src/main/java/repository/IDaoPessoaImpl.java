@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.HibernateUtil;
-import model.Estados;
+import model.Estado;
 import model.Pessoa;
 
 public class IDaoPessoaImpl implements IDaoPessoa{
@@ -34,9 +34,9 @@ public class IDaoPessoaImpl implements IDaoPessoa{
 		
 		List<SelectItem> listaSelectItem = new ArrayList<SelectItem>();
 		
-		List<Estados> estados = entityManager.createQuery("from Estados").getResultList();
+		List<Estado> estados = entityManager.createQuery("from Estado").getResultList();
 		
-		for(Estados e: estados) {
+		for(Estado e: estados) {
 			listaSelectItem.add(new SelectItem(e.getId(),e.getNome()));
 		}
 		

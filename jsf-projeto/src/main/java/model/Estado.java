@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Estados implements Serializable{
+public class Estado implements Serializable{
  
 	private static final long serialVersionUID = 1L;
 

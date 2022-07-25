@@ -39,11 +39,9 @@ public class Pessoa implements Serializable{
 	private String login;
 	private String senha;
 	private String perfil;
-	
-	private String estado;
-	
-	//@Transient
-	//private Estados estados;
+ 
+	private Estado estado;
+	private Cidade cidade;
 	
 	public Pessoa() {
 	}
@@ -140,15 +138,18 @@ public class Pessoa implements Serializable{
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-
-
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-
-
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+	public Cidade getCidade() {
+		return cidade;
+	}
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+ 
 	 
 }

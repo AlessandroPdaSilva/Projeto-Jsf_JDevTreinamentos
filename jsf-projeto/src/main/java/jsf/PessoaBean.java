@@ -27,7 +27,7 @@ import com.google.gson.Gson;
 
 import conexao.HibernateUtil;
 import dao.DaoGenerico;
-import model.Cidades;
+import model.Cidade;
 import model.Pessoa;
 import repository.IDaoPessoa;
 import repository.IDaoPessoaImpl;
@@ -86,14 +86,14 @@ public class PessoaBean {
 		String codigoEstado = (String)event.getComponent().getAttributes().get("submittedValue");
 		
 		if(codigoEstado != null) {
-			
-			List<Cidades> listaCidades = (List<Cidades>) 
-					HibernateUtil.getEntityManager().createQuery("FROM Cidades WHERE estados.id = "+codigoEstado)
+			// Problema aqui
+			List<Cidade> listaCidades = (List<Cidade>) 
+					HibernateUtil.getEntityManager().createQuery("FROM Cidade WHERE estado.id = "+codigoEstado)
 					.getResultList();
 			
 			List<SelectItem> cidadesSelectItems = new ArrayList<SelectItem>();
 			
-			for(Cidades c : listaCidades) {
+			for(Cidade c : listaCidades) {
 				cidadesSelectItems.add(new SelectItem(c.getId(),c.getNome()));
 			}
 			
