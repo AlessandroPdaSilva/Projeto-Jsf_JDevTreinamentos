@@ -86,10 +86,13 @@ public class PessoaBean {
 		String codigoEstado = (String)event.getComponent().getAttributes().get("submittedValue");
 		
 		if(codigoEstado != null) {
+			
+			
 			// Problema aqui
 			List<Cidade> listaCidades = (List<Cidade>) 
-					HibernateUtil.getEntityManager().createQuery("FROM Cidade WHERE estado.id = "+codigoEstado)
+					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+codigoEstado+"'")
 					.getResultList();
+			
 			
 			List<SelectItem> cidadesSelectItems = new ArrayList<SelectItem>();
 			
@@ -98,7 +101,7 @@ public class PessoaBean {
 			}
 			
 			setCidades(cidadesSelectItems);
-			
+			System.out.println(listaCidades);
 		}
 		
 	}
