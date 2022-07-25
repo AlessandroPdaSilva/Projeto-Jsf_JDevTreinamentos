@@ -5,6 +5,8 @@
 		
 		<class>model.Pessoa</class>
 		<class>model.Lancamento</class>
+		<class>model.Estados</class>
+		<class>model.Cidades</class>
 		
 		<!-- DADOS BANCO -->
 		<properties>

@@ -1,9 +1,14 @@
 package repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.HibernateUtil;
+import model.Estados;
 import model.Pessoa;
 
 public class IDaoPessoaImpl implements IDaoPessoa{
@@ -22,6 +27,20 @@ public class IDaoPessoaImpl implements IDaoPessoa{
 		 
 		
 		return p;
+	}
+
+	@Override
+	public List<SelectItem> listaEstados() {
+		
+		List<SelectItem> listaSelectItem = new ArrayList<SelectItem>();
+		
+		List<Estados> estados = entityManager.createQuery("from Estados").getResultList();
+		
+		for(Estados e: estados) {
+			listaSelectItem.add(new SelectItem(e.getId(),e.getNome()));
+		}
+		
+		return listaSelectItem;
 	}
 
 }

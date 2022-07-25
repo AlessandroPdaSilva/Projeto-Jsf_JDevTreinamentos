@@ -20,11 +20,14 @@ import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 
+import conexao.HibernateUtil;
 import dao.DaoGenerico;
+import model.Cidades;
 import model.Pessoa;
 import repository.IDaoPessoa;
 import repository.IDaoPessoaImpl;
@@ -37,6 +40,8 @@ public class PessoaBean {
 	DaoGenerico<Pessoa> daoPessoa = new DaoGenerico<Pessoa>();
 	List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
 	IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
+	List<SelectItem> estados = new ArrayList<SelectItem>();
+	List<SelectItem> cidades = new ArrayList<SelectItem>();
 	
 	
 	// SALVAR
@@ -68,6 +73,35 @@ public class PessoaBean {
 		listaPessoa = daoPessoa.listar(Pessoa.class);
 	}
 	
+	
+	// LISTAR ESTADOS
+	public List<SelectItem> getEstados() {
+		estados = idaoPessoa.listaEstados();
+		return estados;
+	}
+	
+	// CARREGAR CIDADES
+	public void carregarCidades(AjaxBehaviorEvent event) {
+		
+		String codigoEstado = (String)event.getComponent().getAttributes().get("submittedValue");
+		
+		if(codigoEstado != null) {
+			
+			List<Cidades> listaCidades = (List<Cidades>) 
+					HibernateUtil.getEntityManager().createQuery("FROM Cidades WHERE estados.id = "+codigoEstado)
+					.getResultList();
+			
+			List<SelectItem> cidadesSelectItems = new ArrayList<SelectItem>();
+			
+			for(Cidades c : listaCidades) {
+				cidadesSelectItems.add(new SelectItem(c.getId(),c.getNome()));
+			}
+			
+			setCidades(cidadesSelectItems);
+			
+		}
+		
+	}
 	
 	// PESQUISAR CEP
 	public void pesquisarCep(AjaxBehaviorEvent event){
@@ -187,6 +221,18 @@ public class PessoaBean {
 
 	public void setListaPessoa(List<Pessoa> listaPessoa) {
 		this.listaPessoa = listaPessoa;
+	}
+
+	public List<SelectItem> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<SelectItem> cidades) {
+		this.cidades = cidades;
+	}
+
+	public void setEstados(List<SelectItem> estados) {
+		this.estados = estados;
 	}
 
 	

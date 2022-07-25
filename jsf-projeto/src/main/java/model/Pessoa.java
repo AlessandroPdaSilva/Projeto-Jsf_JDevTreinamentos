@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Pessoa implements Serializable{
@@ -39,6 +40,10 @@ public class Pessoa implements Serializable{
 	private String senha;
 	private String perfil;
 	
+	private String estado;
+	
+	//@Transient
+	//private Estados estados;
 	
 	public Pessoa() {
 	}
@@ -135,6 +140,15 @@ public class Pessoa implements Serializable{
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	 
 }
