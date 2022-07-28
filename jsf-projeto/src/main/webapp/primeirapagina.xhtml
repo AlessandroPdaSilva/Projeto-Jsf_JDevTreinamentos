@@ -14,7 +14,7 @@
 	 
 	<ui:include src="/menu.xhtml"/>
 	 
-	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	<h:form id="formPessoa" enctype="multpart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		
 		<h:messages/>
 		
@@ -40,13 +40,17 @@
 				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
 			</h:inputText>
 			
-			
 			<h:outputLabel value="Sexo:"/>
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" >
 				<f:selectItem itemValue="Nao Informado" itemLabel="[--SELECIONE--]"/>
 				<f:selectItem itemValue="M" itemLabel="Masculino"/>
 				<f:selectItem itemValue="F" itemLabel="Feminino"/>
 			</h:selectOneMenu>
+			
+			<h:outputLabel value="Foto:"/>
+			<h:inputFile id="campoFoto" value="#{pessoaBean.arquivoFoto}"></h:inputFile>
+			
+			
 			
 			<h:outputLabel value="Cep:" />
 		 	<h:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP valido"> 

@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -44,7 +47,17 @@ public class Pessoa implements Serializable{
 	private Estado estado;
 	private Cidade cidade;
 	
-	 
+	@Column(columnDefinition = "text")
+	private String fotoBase64;
+	
+	private String extensao;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	private byte[] fotoBase64Original;
+	
+	
+	// CONTRUTOR
 	public Pessoa() {
 	}
 	
@@ -152,7 +165,24 @@ public class Pessoa implements Serializable{
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+	public String getExtensao() {
+		return extensao;
+	}
+	public void setExtensao(String extensao) {
+		this.extensao = extensao;
+	}
+	public byte[] getFotoBase64Original() {
+		return fotoBase64Original;
+	}
+	public void setFotoBase64Original(byte[] fotoBase64Original) {
+		this.fotoBase64Original = fotoBase64Original;
+	}
 
 	@Override
 	public int hashCode() {

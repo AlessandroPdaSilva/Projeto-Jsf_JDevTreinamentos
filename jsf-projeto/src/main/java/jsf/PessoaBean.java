@@ -23,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -38,12 +39,13 @@ import repository.IDaoPessoaImpl;
 @ViewScoped
 public class PessoaBean {
 
-	Pessoa pessoa = new Pessoa();
-	DaoGenerico<Pessoa> daoPessoa = new DaoGenerico<Pessoa>();
-	List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
-	IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
-	List<SelectItem> estados = new ArrayList<SelectItem>();
-	List<SelectItem> cidades = new ArrayList<SelectItem>();
+	private Pessoa pessoa = new Pessoa();
+	private DaoGenerico<Pessoa> daoPessoa = new DaoGenerico<Pessoa>();
+	private List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+	private IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
+	private List<SelectItem> estados = new ArrayList<SelectItem>();
+	private List<SelectItem> cidades = new ArrayList<SelectItem>();
+	private Part arquivoFoto;
 	
 	
 	// SALVAR
@@ -264,6 +266,14 @@ public class PessoaBean {
 
 	public void setEstados(List<SelectItem> estados) {
 		this.estados = estados;
+	}
+
+	public Part getArquivoFoto() {
+		return arquivoFoto;
+	}
+
+	public void setArquivoFoto(Part arquivoFoto) {
+		this.arquivoFoto = arquivoFoto;
 	}
 
 	
