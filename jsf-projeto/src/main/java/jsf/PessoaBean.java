@@ -17,6 +17,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlCommandButton;
+import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -28,6 +29,7 @@ import com.google.gson.Gson;
 import conexao.HibernateUtil;
 import dao.DaoGenerico;
 import model.Cidade;
+import model.Estado;
 import model.Pessoa;
 import repository.IDaoPessoa;
 import repository.IDaoPessoaImpl;
@@ -46,6 +48,7 @@ public class PessoaBean {
 	
 	// SALVAR
 	public String salvar(){
+		System.out.println(pessoa);
 		pessoa = daoPessoa.editar(pessoa);
 		lista();
 		mostrarMsg("Cadastrado com sucesso!!");
@@ -55,6 +58,31 @@ public class PessoaBean {
 	// NOVO
 	public String novo(){
 		pessoa = new Pessoa();
+		return "";
+	}
+	
+	// EDITAR
+	public String editar(){
+		
+		if(pessoa.getCidade() != null) {// carregar cidade
+			
+			List<Cidade> listaCidades = (List<Cidade>) 
+					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
+			pessoa.getEstado().getId()+"'")
+					.getResultList();
+			
+			
+			List<SelectItem> cidadesSelectItems = new ArrayList<SelectItem>();
+			
+			for(Cidade c : listaCidades) {
+				cidadesSelectItems.add(new SelectItem(c,c.getNome()));
+			}
+			
+			setCidades(cidadesSelectItems);
+			System.out.println(listaCidades);
+		}
+		
+		lista();
 		return "";
 	}
 	
@@ -83,21 +111,21 @@ public class PessoaBean {
 	// CARREGAR CIDADES
 	public void carregarCidades(AjaxBehaviorEvent event) {
 		
-		String codigoEstado = (String)event.getComponent().getAttributes().get("submittedValue");
+		Estado estado = (Estado) ((HtmlSelectOneMenu) event.getSource()).getValue();
 		
-		if(codigoEstado != null) {
+		if(estado != null) {
 			
-			
-			// Problema aqui
+			 
 			List<Cidade> listaCidades = (List<Cidade>) 
-					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+codigoEstado+"'")
+					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
+			estado.getId()+"'")
 					.getResultList();
 			
 			
 			List<SelectItem> cidadesSelectItems = new ArrayList<SelectItem>();
 			
 			for(Cidade c : listaCidades) {
-				cidadesSelectItems.add(new SelectItem(c.getId(),c.getNome()));
+				cidadesSelectItems.add(new SelectItem(c,c.getNome()));
 			}
 			
 			setCidades(cidadesSelectItems);

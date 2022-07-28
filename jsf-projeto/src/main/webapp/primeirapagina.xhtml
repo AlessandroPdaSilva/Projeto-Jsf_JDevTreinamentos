@@ -68,14 +68,16 @@
 		 	<h:inputText value="#{pessoaBean.pessoa.uf}" id="uf"/> 
 		 	
 		 	<h:outputLabel value="Estados:"/>
-			<h:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estado}" immediate="true">
+			<h:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estado}" immediate="true" 
+			converter="estadoConverter" >
 				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.estados}"/>
 				<f:ajax execute="@this" event="change" listener="#{pessoaBean.carregarCidades}" render="campoCidades"/>
 			</h:selectOneMenu>
 		 	
 			<h:outputLabel value="Cidades:"/>
-			<h:selectOneMenu id="campoCidades" value="#{pessoaBean.pessoa.cidade}">
+			<h:selectOneMenu id="campoCidades" value="#{pessoaBean.pessoa.cidade}" immediate="true"
+			converter="cidadeConverter">
 				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.cidades}"/>
 			</h:selectOneMenu>
@@ -148,7 +150,7 @@
 			</h:column>
 			
 			<h:column>
-				<h:commandLink value="" title="Editar">
+				<h:commandLink value="" title="Editar" action="#{pessoaBean.editar}">
 					<f:setPropertyActionListener value="#{p}"
 						target="#{pessoaBean.pessoa}" />
 						

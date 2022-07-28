@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,6 +44,7 @@ public class Pessoa implements Serializable{
 	private Estado estado;
 	private Cidade cidade;
 	
+	 
 	public Pessoa() {
 	}
 	
@@ -150,6 +152,37 @@ public class Pessoa implements Serializable{
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		return Objects.equals(id, other.id);
+	}
+
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", idade=" + idade
+				+ ", dataNascimento=" + dataNascimento + ", sexo=" + sexo + ", cep=" + cep + ", logradouro="
+				+ logradouro + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf + ", ativo=" + ativo
+				+ ", login=" + login + ", senha=" + senha + ", perfil=" + perfil + ", estado=" + estado + ", cidade="
+				+ cidade + "]";
+	}
+	
+	
  
 	 
 }
