@@ -11,6 +11,7 @@
 		<!-- DADOS BANCO -->
 		<properties>
 		 
+		 	  <!-- Conxao -->
 			  <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			  <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jsf-projeto" />
 			  <property name="javax.persistence.jdbc.user" value="adm" />
@@ -19,6 +20,14 @@
 			  <property name="hibernate.show_sql" value="true" />
 			  <property name="hibernate.format_sql" value="true" />
 			  <property name="hibernate.hbm2ddl.auto" value="update" />
+			  
+			  
+			  <!-- Gerenciador de portas (Pool) -->
+			  <property name="hibernate.c3p0.min_size" value="5"/>
+			  <property name="hibernate.c3p0.max_size" value="100"/>
+			  <property name="hibernate.c3p0.timeout" value="300"/>
+			  <property name="hibernate.c3p0.max_statements" value="50"/>
+			  <property name="hibernate.c3p0.idle_test_period" value="120"/>
 		
 		</properties>
 		
