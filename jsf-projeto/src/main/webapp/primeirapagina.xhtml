@@ -155,7 +155,11 @@
 			
 			<h:column>
 				<f:facet name="header">Foto</f:facet>
-				<h:graphicImage width="50" height="50" value="#{p.fotoBase64}" />
+				<h:commandLink actionListener="#{pessoaBean.downloadImagem}">
+					<h:graphicImage width="50" height="50" value="#{p.fotoBase64}" />
+					<f:param name="pessoaId" value="#{p.id}"/>
+					<f:param name="foto" value="#{p.fotoBase64}"/>
+				</h:commandLink>
 			</h:column>
 			
 			
