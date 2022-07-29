@@ -1,6 +1,11 @@
 package jsf;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -8,6 +13,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -22,8 +28,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import com.google.gson.Gson;
 
@@ -49,8 +57,39 @@ public class PessoaBean {
 	
 	
 	// SALVAR
-	public String salvar(){
-		System.out.println(pessoa);
+	public String salvar() throws Exception{
+		 
+		// Setando imagem
+		byte[] imagemByte = getByte(arquivoFoto.getInputStream());
+		pessoa.setFotoBase64Original(imagemByte);
+		
+		//transformar em Miniatura
+			  BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+			 
+			  
+			  int type = bufferedImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+			 
+			  int largura = 200;
+			  int altura = 200;
+			 
+			  
+			  BufferedImage resizedImage = new BufferedImage(altura, altura, type);
+			  Graphics2D g = resizedImage.createGraphics();
+			  g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+			  g.dispose();
+			  
+			   
+			  ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			  String extensao = arquivoFoto.getContentType().split("\\/")[1]; /*image/png*/
+			  ImageIO.write(resizedImage, extensao, baos);
+			  
+			  String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," +
+			                       DatatypeConverter.printBase64Binary(baos.toByteArray());
+		 
+		
+		pessoa.setFotoBase64(miniImagem);
+		pessoa.setExtensao(extensao);
+		
 		pessoa = daoPessoa.editar(pessoa);
 		lista();
 		mostrarMsg("Cadastrado com sucesso!!");
@@ -228,6 +267,40 @@ public class PessoaBean {
 		return p.getPerfil().equals(perfilAcesso);
 		
 	}
+	
+	
+	
+	
+	
+	// CONVERSOR INPUTSTREAM PARA BYTES
+	private byte[] getByte(InputStream is) throws Exception{
+		
+		int len;
+		int size = 1024;
+		byte[] buf = null;
+		
+		if (is instanceof ByteArrayInputStream){
+			size = is.available();
+			buf = new byte[size];
+			len = is.read(buf, 0, size);
+		}else {
+			
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			buf = new byte[size];
+			
+			while ((len = is.read(buf, 0, size)) != -1){
+				bos.write(buf, 0, len);
+			}
+			
+			buf = bos.toByteArray();
+			
+		}
+		
+		return buf;
+	}
+	
+	
+	
 	
 	
 	

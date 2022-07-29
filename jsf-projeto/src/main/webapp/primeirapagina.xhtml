@@ -14,7 +14,7 @@
 	 
 	<ui:include src="/menu.xhtml"/>
 	 
-	<h:form id="formPessoa" enctype="multpart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	<h:form id="formPessoa" enctype="multipart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		
 		<h:messages/>
 		
@@ -152,6 +152,12 @@
 				<f:facet name="header">idade</f:facet>
 				<h:outputText value="#{p.idade}" />
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Foto</f:facet>
+				<h:graphicImage width="50" height="50" value="#{p.fotoBase64}" />
+			</h:column>
+			
 			
 			<h:column>
 				<h:commandLink value="" title="Editar" action="#{pessoaBean.editar}">
