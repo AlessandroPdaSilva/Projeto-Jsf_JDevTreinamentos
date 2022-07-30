@@ -15,6 +15,10 @@ import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Pessoa implements Serializable{
@@ -26,7 +30,11 @@ public class Pessoa implements Serializable{
 	private Long id;
 	
 	private String nome;
+	
+	@org.hibernate.validator.constraints.NotEmpty(message = "O campo sobrenome esta vazio")
 	private String sobrenome;
+	
+	@DecimalMin(value = "18", message = "Idade minima e 18 anos")
 	private int idade;
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
