@@ -1,38 +1,32 @@
 package conexao;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+@ApplicationScoped
 public class HibernateUtil {
 	
 	public static EntityManagerFactory factory = null;
 	
-	static {
-		init();
-	}
-	
-	public static void init(){
-		
-		try {
-			
-			if(factory == null) {
-				factory = Persistence.createEntityManagerFactory("jsf-projeto");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+	public HibernateUtil() {
+		if(factory == null) {
+			factory = Persistence.createEntityManagerFactory("jsf-projeto");
 		}
-		
 	}
+	 
 	
-	// GET CONEXAO
-	public static EntityManager getEntityManager() {
+	@Produces
+	@RequestScoped
+	public EntityManager getEntityManager() {
 		return factory.createEntityManager();
 	}
 	
 	// RETORNA CHAVE PRIMARIA
-	public static Object getPrimaryKey(Object entidade) { 
+	public Object getPrimaryKey(Object entidade) { 
 		return factory.getPersistenceUnitUtil().getIdentifier(entidade);
 	}
 	

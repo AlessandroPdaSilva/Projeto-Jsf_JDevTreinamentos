@@ -6,22 +6,27 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.HibernateUtil;
 import model.Estado;
 
+ 
 @FacesConverter(forClass = Estado.class, value = "estadoConverter")
 public class EstadoConverter implements Serializable, Converter {
  
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private HibernateUtil hibernateUtil;
 	
 	@Override // RETORNA OBJETO
 	public Object getAsObject(FacesContext context, UIComponent component, String codigoEstado) {
 		
-		EntityManager entityManager = HibernateUtil.getEntityManager();
+		EntityManager entityManager = hibernateUtil.getEntityManager();
 		EntityTransaction transacao = entityManager.getTransaction();
 		transacao.begin();
 		

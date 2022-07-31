@@ -1,6 +1,9 @@
 package filter;
 
 import java.io.IOException;
+import java.io.Serializable;
+
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,18 +19,20 @@ import javax.servlet.http.HttpSession;
 import conexao.HibernateUtil;
 import model.Pessoa;
 
-/**
- * Servlet Filter implementation class FilterAutenticacao
- */
 @WebFilter("/*")
-public class FilterAutenticacao extends HttpFilter implements Filter {
-
+public class FilterAutenticacao extends HttpFilter implements Filter,Serializable {
+ 
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private HibernateUtil hibernateUtil;
+	
     public FilterAutenticacao() {
         super();
     }
 
 	public void destroy() {
-		HibernateUtil.getEntityManager().close();;
+		hibernateUtil.getEntityManager().close();;
 	}
  
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -51,7 +56,7 @@ public class FilterAutenticacao extends HttpFilter implements Filter {
 	}
 	
 	public void init(FilterConfig fConfig) throws ServletException {
-		HibernateUtil.getEntityManager();
+		hibernateUtil.getEntityManager();
 	}
 
 }

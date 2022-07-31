@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -29,6 +30,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -44,14 +48,23 @@ import model.Pessoa;
 import repository.IDaoPessoa;
 import repository.IDaoPessoaImpl;
 
-@ManagedBean(name = "pessoaBean")
-@ViewScoped
-public class PessoaBean {
-
-	private Pessoa pessoa = new Pessoa();
-	private DaoGenerico<Pessoa> daoPessoa = new DaoGenerico<Pessoa>();
-	private List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
+@Named(value = "pessoaBean")
+@javax.faces.view.ViewScoped
+public class PessoaBean implements Serializable{
+ 
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private DaoGenerico<Pessoa> daoPessoa;
+	
+	@Inject
 	private IDaoPessoa idaoPessoa = new IDaoPessoaImpl();
+	
+	@Inject
+	private HibernateUtil hibernateUtil;
+	
+	private Pessoa pessoa = new Pessoa();
+	private List<Pessoa> listaPessoa = new ArrayList<Pessoa>();
 	private List<SelectItem> estados = new ArrayList<SelectItem>();
 	private List<SelectItem> cidades = new ArrayList<SelectItem>();
 	private Part arquivoFoto;
@@ -109,7 +122,7 @@ public class PessoaBean {
 		if(pessoa.getCidade() != null) {// carregar cidade
 			
 			List<Cidade> listaCidades = (List<Cidade>) 
-					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
+					hibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
 			pessoa.getEstado().getId()+"'")
 					.getResultList();
 			
@@ -159,7 +172,7 @@ public class PessoaBean {
 			
 			 
 			List<Cidade> listaCidades = (List<Cidade>) 
-					HibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
+					hibernateUtil.getEntityManager().createQuery("SELECT c FROM Cidade c WHERE estado.id = '"+
 			estado.getId()+"'")
 					.getResultList();
 			

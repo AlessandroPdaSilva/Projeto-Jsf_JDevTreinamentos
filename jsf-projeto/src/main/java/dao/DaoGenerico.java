@@ -1,16 +1,25 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import conexao.HibernateUtil;
 
-public class DaoGenerico<E> {
+@Named
+public class DaoGenerico<E> implements Serializable{
+ 
+	private static final long serialVersionUID = 1L;
 
-	 
-	private EntityManager entityManager  = HibernateUtil.getEntityManager();
+	@Inject
+	private EntityManager entityManager;
+	
+	@Inject
+	private HibernateUtil hibernateUtil;
 	
 	// SALVAR
 	public void salvar(E entidade){
@@ -40,7 +49,7 @@ public class DaoGenerico<E> {
 	// DELETAR
 	public void deletar(E entidade){
 		
-		Object id = HibernateUtil.getPrimaryKey(entidade);
+		Object id = hibernateUtil.getPrimaryKey(entidade);
 		
 		EntityTransaction transacao = entityManager.getTransaction();
 		transacao.begin();
@@ -69,7 +78,7 @@ public class DaoGenerico<E> {
 	// PESQUISAR
 	public E pesquisar(E entidade){
 		
-		Object id = HibernateUtil.getPrimaryKey(entidade);
+		Object id = hibernateUtil.getPrimaryKey(entidade);
 
 		E e = (E) entityManager.find(entidade.getClass(), id);
 		

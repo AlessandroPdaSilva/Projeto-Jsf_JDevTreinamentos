@@ -1,9 +1,12 @@
 package repository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -11,10 +14,16 @@ import conexao.HibernateUtil;
 import model.Estado;
 import model.Pessoa;
 
-public class IDaoPessoaImpl implements IDaoPessoa{
+@Named
+public class IDaoPessoaImpl implements IDaoPessoa,Serializable{
+	 
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private HibernateUtil hibernateUtil;
 	
-	// conexao
-	private EntityManager entityManager  = HibernateUtil.getEntityManager();
+	@Inject
+	private EntityManager entityManager;
 
 	@Override
 	public Pessoa consultaPessoa(String login, String senha) {

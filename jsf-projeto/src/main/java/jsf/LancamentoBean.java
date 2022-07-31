@@ -1,5 +1,6 @@
 package jsf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import dao.DaoGenerico;
 import model.Lancamento;
@@ -16,14 +19,20 @@ import repository.IDaoLancamento;
 import repository.IDaoLancamentoImpl;
  
 
-@ViewScoped
-@ManagedBean(name = "lancamentoBean")
-public class LancamentoBean {
+@javax.faces.view.ViewScoped
+@Named(value = "lancamentoBean")
+public class LancamentoBean implements Serializable{
+ 
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	IDaoLancamento iDaoLancamento = new IDaoLancamentoImpl();
+	
+	@Inject
+	DaoGenerico<Lancamento> daoLancamento = new DaoGenerico<Lancamento>();
 	
 	private Lancamento lancamento = new Lancamento();
-	DaoGenerico<Lancamento> daoLancamento = new DaoGenerico<Lancamento>();
 	List<Lancamento> listaLancamento = new ArrayList<Lancamento>();
-	IDaoLancamento iDaoLancamento = new IDaoLancamentoImpl();
 	
 	// SALVAR
 	public String salvar(){
