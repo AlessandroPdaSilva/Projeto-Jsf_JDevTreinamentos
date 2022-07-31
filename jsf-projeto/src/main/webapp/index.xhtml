@@ -14,13 +14,17 @@
  	
  		<h1>Login</h1>
  		
- 		<h:panelGrid>
+ 		<b:messages id="msg"/>
  		
+ 		<h:panelGrid columns="3">
+ 			
  			<h:outputLabel value="Login: "/>
- 			<h:inputText value="#{pessoaBean.pessoa.login}"/>
+ 			<b:inputText value="#{pessoaBean.pessoa.login}" id="login" required="true" requiredMessage="Informe o login" autoUpdate="true"/>
+ 			<b:message for="login"/>
  			
  			<h:outputLabel value="Senha: "/>
- 			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+ 			<b:inputSecret value="#{pessoaBean.pessoa.senha}" id="senha" required="true" requiredMessage="Informe a Senha" autoUpdate="true"/>
+ 			<b:message for="senha"/>
  			
  			<h:commandButton value="Enviar" action="#{pessoaBean.logar}"/>
  			

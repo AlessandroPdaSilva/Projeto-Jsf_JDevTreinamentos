@@ -237,7 +237,7 @@ public class PessoaBean implements Serializable{
 		 
 		Pessoa p = idaoPessoa.consultaPessoa(pessoa.getLogin(), pessoa.getSenha());
 		
-		if(p != null) {
+		if(p.getNome() != null) {
 			
 			// adicionar na sessao
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -247,9 +247,11 @@ public class PessoaBean implements Serializable{
 			
 			return "primeirapagina.jsf";
 		}else {
+			FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Usuario não encontrado!!"));
 			return "index.jsf";
+
 		}
-		
+				
 	}
 	
 	// DESLOGAR
@@ -277,9 +279,9 @@ public class PessoaBean implements Serializable{
 		ExternalContext external = context.getExternalContext();
 		
 	 	Pessoa p =(Pessoa) external.getSessionMap().get("usuarioLogado");
-		
-		return p.getPerfil().equals(perfilAcesso);
-		
+	  
+	 	return p.getPerfil().equals(perfilAcesso);
+	 
 	}
 	
 

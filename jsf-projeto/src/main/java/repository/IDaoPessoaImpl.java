@@ -30,8 +30,13 @@ public class IDaoPessoaImpl implements IDaoPessoa,Serializable{
 		
 		Pessoa p = new Pessoa();
 		 
-		p = (Pessoa) entityManager.createQuery("SELECT p FROM Pessoa p WHERE login = '" + login + "' "
-				+ "AND senha = '"+senha+"'").getSingleResult();
+		try {
+			p = (Pessoa) entityManager.createQuery("SELECT p FROM Pessoa p WHERE login = '" + login + "' "
+					+ "AND senha = '"+senha+"'").getSingleResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		 
 		
