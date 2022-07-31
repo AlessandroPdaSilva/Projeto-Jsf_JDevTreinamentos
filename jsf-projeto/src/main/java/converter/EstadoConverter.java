@@ -2,6 +2,7 @@ package converter;
 
 import java.io.Serializable;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,16 +20,12 @@ import model.Estado;
 public class EstadoConverter implements Serializable, Converter {
  
 	private static final long serialVersionUID = 1L;
-
-	@Inject
-	private HibernateUtil hibernateUtil;
+  
 	
 	@Override // RETORNA OBJETO
 	public Object getAsObject(FacesContext context, UIComponent component, String codigoEstado) {
 		
-		EntityManager entityManager = hibernateUtil.getEntityManager();
-		EntityTransaction transacao = entityManager.getTransaction();
-		transacao.begin();
+		EntityManager entityManager = CDI.current().select(EntityManager.class).get();
 		
 		Estado estado = entityManager.find(Estado.class, Long.parseLong(codigoEstado));
 

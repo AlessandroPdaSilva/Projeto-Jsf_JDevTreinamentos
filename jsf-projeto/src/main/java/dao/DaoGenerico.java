@@ -24,25 +24,17 @@ public class DaoGenerico<E> implements Serializable{
 	// SALVAR
 	public void salvar(E entidade){
 		
-		EntityTransaction transacao = entityManager.getTransaction();
 		
-		transacao.begin();
 		entityManager.persist(entidade);
 				
-		transacao.commit();
 		
 	}
 	
 	// EDITAR
 	public E editar(E entidade){
 		
-		EntityTransaction transacao = entityManager.getTransaction();
-		
-		transacao.begin();
 		E e = entityManager.merge(entidade);
 				
-		transacao.commit();
-		
 		return e;
 	}
 	
@@ -51,26 +43,18 @@ public class DaoGenerico<E> implements Serializable{
 		
 		Object id = hibernateUtil.getPrimaryKey(entidade);
 		
-		EntityTransaction transacao = entityManager.getTransaction();
-		transacao.begin();
 		
 		entityManager.createNativeQuery("DELETE FROM "+ entidade.getClass().getSimpleName().toLowerCase()+
 				" WHERE id = " + id).executeUpdate();
 		
-		transacao.commit();
 		
 	}
 	
 	// LISTA ENTIDADE
 	public List<E> listar(Class<E> entidade){
 		
-		EntityTransaction transacao = entityManager.getTransaction();
-		
-		transacao.begin();
 		
 		List<E> lista = entityManager.createQuery("FROM "+ entidade.getName()).getResultList();
-		
-		transacao.commit();
 		
 		return lista;
 	}
