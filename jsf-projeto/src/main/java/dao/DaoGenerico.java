@@ -74,6 +74,24 @@ public class DaoGenerico<E> implements Serializable{
 		return lista;
 	}
 	
+	// LISTA ENTIDADE Limit
+		public List<E> listar(Class<E> entidade, int limit){
+			
+			EntityTransaction transicao = entityManager.getTransaction();
+			transicao.begin();
+			
+			List<E> lista = entityManager.createQuery("FROM "+ entidade.getName() + " ORDER BY id DESC ")
+					.setMaxResults(limit)
+					.getResultList();
+			
+			transicao.commit();
+			
+			
+			return lista;
+		}
+	
+	
+	
 	// PESQUISAR
 	public E pesquisar(E entidade){
 		

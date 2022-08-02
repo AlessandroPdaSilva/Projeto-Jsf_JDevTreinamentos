@@ -30,7 +30,21 @@ public class IDaoLancamentoImpl implements IDaoLancamento,Serializable{
 		
 		List<Lancamento> listaLancamento = new ArrayList<Lancamento>();
 		
-		listaLancamento = (List<Lancamento>) entityManager.createQuery("SELECT l FROM Lancamento l WHERE usuario.id = '"+ idUsuario + "'").getResultList();
+		listaLancamento = (List<Lancamento>) entityManager.createQuery(
+				"SELECT l FROM Lancamento l WHERE usuario.id = '"+ idUsuario + "'").getResultList();
+		
+		return listaLancamento;
+	}
+	
+	@Override
+	public List<Lancamento> consultaLimit10(Long idUsuario) {
+		
+		List<Lancamento> listaLancamento = new ArrayList<Lancamento>();
+		
+		listaLancamento = (List<Lancamento>) entityManager.createQuery(
+				"SELECT l FROM Lancamento l WHERE usuario.id = '"+ idUsuario + "' ORDER BY id DESC ")
+				.setMaxResults(10)
+				.getResultList();
 		
 		return listaLancamento;
 	}

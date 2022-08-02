@@ -159,7 +159,7 @@ public class PessoaBean implements Serializable{
 	//LISTAR
 	@PostConstruct
 	public void lista(){
-		listaPessoa = daoPessoa.listar(Pessoa.class);
+		listaPessoa = daoPessoa.listar(Pessoa.class,10);
 	}
 	
 	

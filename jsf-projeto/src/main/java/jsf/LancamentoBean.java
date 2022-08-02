@@ -78,7 +78,7 @@ public class LancamentoBean implements Serializable{
 		
 	 	Pessoa p = (Pessoa) external.getSessionMap().get("usuarioLogado");
 	 
-	 	listaLancamento = iDaoLancamento.consulta(p.getId());
+	 	listaLancamento = iDaoLancamento.consultaLimit10(p.getId());
 	 	
 	}
 		
