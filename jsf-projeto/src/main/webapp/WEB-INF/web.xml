@@ -35,6 +35,10 @@
 		<param-value>default</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>BootsFaces_THEME</param-name>
+		<param-value>cerulean</param-value>
+	</context-param>
 
 
 </web-app>

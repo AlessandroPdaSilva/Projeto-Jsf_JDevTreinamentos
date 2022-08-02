@@ -14,9 +14,11 @@
  	
  	<ui:include src="/menu.xhtml"/>
  	
- 	<h:form>
+ 	<b:form>
  		
  		<h1>Lançamentos</h1>
+ 		
+ 		<b:messages id="msg"/>
  		
  		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -24,19 +26,19 @@
 			</f:facet>
 			
 			<h:outputLabel value="Id:" />
-			<h:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
+			<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
 
 			<h:outputLabel value="Nota:" />
-			<h:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
+			<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
 
 			<h:outputLabel value="Origem:" />
-			<h:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
+			<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
 			 
 			<h:outputLabel value="Destino:" />
-			<h:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+			<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
 			
 			
-			<h:outputLabel></h:outputLabel>
+			<h:outputLabel/>
 			<h:panelGroup>
 				<h:commandButton value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvar.png"/>
 				<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novo_usuario.png"/>
@@ -50,7 +52,7 @@
  		
  		
  		
- 		<h:dataTable value="#{lancamentoBean.listaLancamento}" var="l" border="3" cellpadding="6">
+ 		<b:dataTable value="#{lancamentoBean.listaLancamento}" var="l" border="3" cellpadding="6">
 		
 			<f:facet name="header">
 				Lista de Lançamentos
@@ -93,11 +95,11 @@
 			</h:column>
 
 
-		</h:dataTable>
+		</b:dataTable>
  		
  		
  		
- 	</h:form>
+ 	</b:form>
  	
  	
  </h:body>

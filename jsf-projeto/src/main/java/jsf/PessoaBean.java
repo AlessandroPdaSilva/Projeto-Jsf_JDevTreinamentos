@@ -45,6 +45,7 @@ import dao.DaoGenerico;
 import model.Cidade;
 import model.Estado;
 import model.Pessoa;
+import net.bootsfaces.component.selectOneMenu.SelectOneMenu;
 import repository.IDaoPessoa;
 import repository.IDaoPessoaImpl;
 
@@ -74,35 +75,40 @@ public class PessoaBean implements Serializable{
 	public String salvar() throws Exception{
 		 
 		// Setando imagem
-		byte[] imagemByte = getByte(arquivoFoto.getInputStream());
-		pessoa.setFotoBase64Original(imagemByte);
-		
-		//transformar em Miniatura
-			  BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+		if(arquivoFoto != null) {
+			
+			byte[] imagemByte = getByte(arquivoFoto.getInputStream());
+			pessoa.setFotoBase64Original(imagemByte);
+			
+				  //transformar em Miniatura
+				  BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+				 
+				  
+				  int type = bufferedImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
+				 
+				  int largura = 200;
+				  int altura = 200;
+				 
+				  
+				  BufferedImage resizedImage = new BufferedImage(altura, altura, type);
+				  Graphics2D g = resizedImage.createGraphics();
+				  g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+				  g.dispose();
+				  
+				   
+				  ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				  String extensao = arquivoFoto.getContentType().split("\\/")[1]; /*image/png*/
+				  ImageIO.write(resizedImage, extensao, baos);
+				  
+				  String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," +
+				                       DatatypeConverter.printBase64Binary(baos.toByteArray());
 			 
-			  
-			  int type = bufferedImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : bufferedImage.getType();
-			 
-			  int largura = 200;
-			  int altura = 200;
-			 
-			  
-			  BufferedImage resizedImage = new BufferedImage(altura, altura, type);
-			  Graphics2D g = resizedImage.createGraphics();
-			  g.drawImage(bufferedImage, 0, 0, largura, altura, null);
-			  g.dispose();
-			  
-			   
-			  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			  String extensao = arquivoFoto.getContentType().split("\\/")[1]; /*image/png*/
-			  ImageIO.write(resizedImage, extensao, baos);
-			  
-			  String miniImagem = "data:" + arquivoFoto.getContentType() + ";base64," +
-			                       DatatypeConverter.printBase64Binary(baos.toByteArray());
-		 
-		
-		pessoa.setFotoBase64(miniImagem);
-		pessoa.setExtensao(extensao);
+			
+			pessoa.setFotoBase64(miniImagem);
+			pessoa.setExtensao(extensao);
+			
+			
+		}	
 		
 		pessoa = daoPessoa.editar(pessoa);
 		lista();
@@ -166,7 +172,7 @@ public class PessoaBean implements Serializable{
 	// CARREGAR CIDADES
 	public void carregarCidades(AjaxBehaviorEvent event) {
 		
-		Estado estado = (Estado) ((HtmlSelectOneMenu) event.getSource()).getValue();
+		Estado estado = (Estado) ((SelectOneMenu) event.getSource()).getValue();
 		
 		if(estado != null) {
 			

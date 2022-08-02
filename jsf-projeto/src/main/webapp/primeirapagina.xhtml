@@ -17,7 +17,7 @@
 	 
 	<h:form id="formPessoa" enctype="multipart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		
-		<h:messages/>
+		<b:messages id="msg"/>
 		
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -73,19 +73,19 @@
 		 	<b:inputText value="#{pessoaBean.pessoa.uf}" id="uf"/> 
 		 	
 		 	<h:outputLabel value="Estados:"/>
-			<h:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estado}" immediate="true" 
+			<b:selectOneMenu id="campoEstados" value="#{pessoaBean.pessoa.estado}" immediate="true" 
 			converter="estadoConverter" >
 				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.estados}"/>
 				<f:ajax execute="@this" event="change" listener="#{pessoaBean.carregarCidades}" render="campoCidades"/>
-			</h:selectOneMenu>
+			</b:selectOneMenu>
 		 	
 			<h:outputLabel value="Cidades:"/>
-			<h:selectOneMenu id="campoCidades" value="#{pessoaBean.pessoa.cidade}" immediate="true"
+			<b:selectOneMenu id="campoCidades" value="#{pessoaBean.pessoa.cidade}" immediate="true"
 			converter="cidadeConverter">
 				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.cidades}"/>
-			</h:selectOneMenu>
+			</b:selectOneMenu>
 			
 			
 			<h:outputLabel value="Usuario Ativo:" />

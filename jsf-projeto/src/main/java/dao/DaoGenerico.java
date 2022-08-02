@@ -24,17 +24,24 @@ public class DaoGenerico<E> implements Serializable{
 	// SALVAR
 	public void salvar(E entidade){
 		
-		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
 		entityManager.persist(entidade);
-				
+		transicao.commit();
+		
 		
 	}
 	
 	// EDITAR
 	public E editar(E entidade){
 		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
+		
 		E e = entityManager.merge(entidade);
 				
+		transicao.commit();
+		
 		return e;
 	}
 	
@@ -43,18 +50,26 @@ public class DaoGenerico<E> implements Serializable{
 		
 		Object id = hibernateUtil.getPrimaryKey(entidade);
 		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
 		
 		entityManager.createNativeQuery("DELETE FROM "+ entidade.getClass().getSimpleName().toLowerCase()+
 				" WHERE id = " + id).executeUpdate();
 		
+		transicao.commit();
 		
 	}
 	
 	// LISTA ENTIDADE
 	public List<E> listar(Class<E> entidade){
 		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
 		
 		List<E> lista = entityManager.createQuery("FROM "+ entidade.getName()).getResultList();
+		
+		transicao.commit();
+		
 		
 		return lista;
 	}
@@ -62,16 +77,26 @@ public class DaoGenerico<E> implements Serializable{
 	// PESQUISAR
 	public E pesquisar(E entidade){
 		
+		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
+		
 		Object id = hibernateUtil.getPrimaryKey(entidade);
 
 		E e = (E) entityManager.find(entidade.getClass(), id);
 		
+		transicao.commit();
 		return e;
 	}
 	
 	public E pesquisar(Long id, E entidade){
 		
+		EntityTransaction transicao = entityManager.getTransaction();
+		transicao.begin();
+		
 		E e = (E) entityManager.find(entidade.getClass(), id);
+		
+		transicao.commit();
 		
 		return e;
 	}
