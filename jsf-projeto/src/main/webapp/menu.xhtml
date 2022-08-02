@@ -7,9 +7,24 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<h:form>
-		<h:commandLink value="Home" action="primeirapagina" style="margin-left:1%;"/>  
-		<h:commandLink value="Login" action="#{pessoaBean.deslogar}" style="margin-left:1%;"/>
-		<h:commandLink value="Lançamentos" action="lancamentos" style="margin-left:1%;"/>
+	
+		<b:navBar fluid="true">
+		
+			<b:navbarLinks>
+				<b:navCommandLink value="Home" action="primeirapagina"/>
+				<b:navCommandLink value="Lançamentos" action="lancamentos"/>
+				
+				<b:dropMenu value="Relatorios">
+					<b:navCommandLink value="Rel. Notas"/>
+					<b:navCommandLink value="Rel. Usuario"/>
+				</b:dropMenu>
+				
+				<b:navCommandLink value="Sair" action="#{pessoaBean.deslogar}"/>
+				
+			</b:navbarLinks>
+			
+		</b:navBar>
+	
 	</h:form>
 
  </html>
