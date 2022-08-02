@@ -20,36 +20,44 @@
  		
  		<b:messages id="msg"/>
  		
- 		<h:panelGrid columns="2">
-			<f:facet name="header">
-				<h:outputText value="Cadastro em JSF"/>  
-			</f:facet>
+ 		<b:panelGrid columns="2">
 			
-			<h:outputLabel value="Id:" />
-			<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
-
-			<h:outputLabel value="Nota:" />
-			<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
-
-			<h:outputLabel value="Origem:" />
-			<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
-			 
-			<h:outputLabel value="Destino:" />
-			<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+			<b:panel>
+				<h:outputLabel value="Id:" />
+				<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true" />
+				
+				<h:outputLabel value="Nota:" />
+				<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" />
+				
+				<h:outputLabel value="Data Inicial:" />
+				<b:datepicker locale="en" value="#{lancamentoBean.lancamento.dataInicial}" />
+			</b:panel>
 			
+			<b:panel>
+				<h:outputLabel value="Origem:" />
+				<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" />
+				 
+				<h:outputLabel value="Destino:" />
+				<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" />
+				
+				<h:outputLabel value="Data Final:" />
+				<b:datepicker locale="en" value="#{lancamentoBean.lancamento.dataFinal}" />
+			</b:panel>
 			
 			<h:outputLabel/>
-			<h:panelGroup>
-				<h:commandButton value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvar.png"/>
-				<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novo_usuario.png"/>
-				<h:commandButton value="Excluir" action="#{lancamentoBean.deletar}" image="resources/img/lixeira.png" />
-				<h:commandButton value="Limpar" type="reset" image="resources/img/limpar.png"/>
-			</h:panelGroup>
 			
 			
 			
- 		</h:panelGrid>	 
+			
+ 		</b:panelGrid>	 
  		
+ 		
+		<h:panelGroup>
+			<h:commandButton value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvar.png"/>
+			<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novo_usuario.png"/>
+			<h:commandButton value="Excluir" action="#{lancamentoBean.deletar}" image="resources/img/lixeira.png" />
+			<h:commandButton value="Limpar" type="reset" image="resources/img/limpar.png"/>
+		</h:panelGroup>
  		
  		
  		<b:dataTable value="#{lancamentoBean.listaLancamento}" var="l" border="3" cellpadding="6">
