@@ -34,7 +34,7 @@
 			<b:inputText value="#{pessoaBean.pessoa.sobrenome}" />
 			 
 			<h:outputLabel value="Idade:" />
-			<b:inputText value="#{pessoaBean.pessoa.idade}" />
+			<b:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric"/>
 			
 			<h:outputLabel value="Data de Nascimento:" />
 			<b:datepicker locale="en" value="#{pessoaBean.pessoa.dataNascimento}" />
@@ -53,7 +53,7 @@
 			
 			
 			<h:outputLabel value="Cep:" />
-		 	<b:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP valido"> 
+		 	<b:inputText value="#{pessoaBean.pessoa.cep}" mask="99999-999" pt:placeholder="Informe um CEP valido"> 
 		 		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisarCep}"
 		 		render="logradouro bairro localidade uf"/>
 		 	</b:inputText>
