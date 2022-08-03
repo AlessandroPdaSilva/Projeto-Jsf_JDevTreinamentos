@@ -20,11 +20,23 @@
  		
  		<b:messages id="msg"/>
  		
+ 		 
+ 		<b:panel>
+	 		<h:outputLabel value="Data Inicial:" />
+			<b:datepicker locale="en" value="#{relLancamento.dataInicial}" />
+	 		
+	 		<h:outputLabel value="Data Final:" />
+			<b:datepicker locale="en" value="#{relLancamento.datafinal}" />
+ 		</b:panel> 
+ 		 
+ 		
 		<h:panelGroup>
 			<b:commandButton value="Buscar" action="#{relLancamento.buscar}" />
 		</h:panelGroup>
  		
  		
+ 		
+ 		<br/><br/>
  		<b:dataTable value="#{relLancamento.listaLancamento}" pdf="true" var="l">
 			
 			<b:dataTableColumn  value="#{l.id}"/>
