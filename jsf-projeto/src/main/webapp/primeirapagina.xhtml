@@ -36,10 +36,9 @@
 			<h:outputLabel value="Idade:" />
 			<b:inputText value="#{pessoaBean.pessoa.idade}" />
 			
-			<h:outputLabel value="Nascimento:"/>
-			<b:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data errada!!">
-				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
-			</b:inputText>
+			<h:outputLabel value="Data de Nascimento:" />
+			<b:datepicker locale="en" value="#{pessoaBean.pessoa.dataNascimento}" />
+			
 			
 			<h:outputLabel value="Sexo:"/>
 			<b:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" >
